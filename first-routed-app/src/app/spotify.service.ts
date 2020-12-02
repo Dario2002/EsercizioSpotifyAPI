@@ -16,8 +16,7 @@ export class SpotifyService {
   searchTrack(query: string) {
     const url = `https://api.spotify.com/v1/search?q=${query}&type=track`;
     const headers = new HttpHeaders({
-      Authorization:
-        'Bearer BQAMibucGIlp-4i-lX36t9JKDvk21S6zd_7YInkM9d_iQlAcsXadantfn5llYrMqS4n58euFZ5dAVKUdJjScxa_lgPlYjuRsNSvYFqSjW-ddaVhMIWJlxLMHRz46J9HimZvFkMfHK5mvD8CtTy08W9-nuzXNgd4'
+      Authorization: environment.oauthToken
     });
 
     let obsTracks = this.http.get(url, { headers });
@@ -28,11 +27,29 @@ export class SpotifyService {
   getTrack(id: string) {
       const url = `https://api.spotify.com/v1/tracks/${id}`;
       const headers = new HttpHeaders({
-        Authorization:
-          'Bearer BQAMibucGIlp-4i-lX36t9JKDvk21S6zd_7YInkM9d_iQlAcsXadantfn5llYrMqS4n58euFZ5dAVKUdJjScxa_lgPlYjuRsNSvYFqSjW-ddaVhMIWJlxLMHRz46J9HimZvFkMfHK5mvD8CtTy08W9-nuzXNgd4'
+        Authorization: environment.oauthToken
       });
 
       return this.http.get(url, { headers });
     }
 
+  searchArtist(query: string) {
+    const url = `https://api.spotify.com/v1/search?q=${query}&type=artist`;
+    const headers = new HttpHeaders({
+      Authorization: environment.oauthToken
+    });
+
+    let obsTracks = this.http.get(url, { headers });
+    return obsTracks;
+ //Ritorno un observable ai componenti che richiedono il servizio
+  }
+
+  getArtist(id: string) {
+      const url = `https://api.spotify.com/v1/artists/${id}`;
+      const headers = new HttpHeaders({
+        Authorization: environment.oauthToken
+      });
+
+      return this.http.get(url, { headers });
+    }
 }
