@@ -52,4 +52,23 @@ export class SpotifyService {
 
       return this.http.get(url, { headers });
     }
+  searchAlbum(query: string) {
+    const url = `https://api.spotify.com/v1/search?q=${query}&type=album`;
+    const headers = new HttpHeaders({
+      Authorization: environment.oauthToken
+    });
+
+    let obsTracks = this.http.get(url, { headers });
+    return obsTracks;
+ //Ritorno un observable ai componenti che richiedono il servizio
+  }
+
+  getAlbum(id: string) {
+      const url = `https://api.spotify.com/v1/albums/${id}`;
+      const headers = new HttpHeaders({
+        Authorization: environment.oauthToken
+      });
+
+      return this.http.get(url, { headers });
+    }
 }
